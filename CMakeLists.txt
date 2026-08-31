@@ -30,8 +30,13 @@ list(APPEND PLUGIN_SRCS
 		${PLUGIN_DIR}/src/gAndroidToast.cpp
 		${PLUGIN_DIR}/src/gAndroidWindow.cpp
 		${PLUGIN_DIR}/src/gAndroidUtil.cpp
-		${PLUGIN_DIR}/src/gAndroidCanvas.cpp
-		${PLUGIN_DIR}/src/gAndroidApp.cpp
+)
+
+# The platform registers itself from a static object, and nothing in the engine
+# refers to it. Engine sources end up in a static library, where the linker
+# drops members nothing needs, so this one goes into the app target instead.
+list(APPEND PLUGIN_EXECUTABLE_SRCS
+		${PLUGIN_DIR}/src/gAndroidPlatform.cpp
 )
 
 
